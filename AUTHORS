@@ -1,0 +1,13 @@
+
+Argon2: The memory-hard function for password hashing and other applications
+
+Designers: Alex Biryukov, Daniel Dinu, and Dmitry Khovratovich
+				University of Luxembourg, Luxembourg
+
+alex.biryukov@uni.lu, dumitru-daniel.dinu@uni.lu, khovratovich@gmail.com
+
+https://www.cryptolux.org/index.php/Argon2
+https://github.com/P-H-C/phc-winner-argon2
+https://github.com/khovratovich/Argon2
+Version 1.3 of Argon2: PHC release
+February 29, 2016
