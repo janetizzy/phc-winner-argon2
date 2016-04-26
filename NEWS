@@ -1,1 +1,2 @@
+April 26, 2016 :: Working minimum to build Argon2 on x86_64 with a known good libpthread on-system.
 April 25, 2016 :: Attempt to AutoTool Argon
