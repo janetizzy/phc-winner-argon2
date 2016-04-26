@@ -2,6 +2,7 @@ AUTOMAKE_OPTIONS = subdir-objects
 
 AM_CFLAGS  = -I$(top_srcdir)/include
 AM_CFLAGS += -I$(top_srcdir)/src
+AM_CFLAGS += -I$(top_srcdir)/src/blake2
 
 bin_PROGRAMS = argon2 
 argon2_SOURCES = \

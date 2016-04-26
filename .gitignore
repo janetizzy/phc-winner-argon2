@@ -29,6 +29,7 @@ Makefile.in
 /aclocal.m4
 /compile
 /config.h.in
+/config.h.in~
 /config.h
 /config.log
 /config.status
@@ -79,3 +80,7 @@ Makefile.in
 # Build files
 .deps
 .dirstamp
+
+#
+# Misc:
+*.kate-swp

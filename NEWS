@@ -1,2 +1,8 @@
+April 26, 2016 :: Add-in a general libpthread locator
+# ~/SCM/argon2> ./argon2 1234567890 -t 7 -p 4 -e
+# IShallBeReleased
+# argon2i$v=19$m=4096,t=7,p=4$MTIzNDU2Nzg5MA$BNg+Gz8ruaVNdKfw25snLAeK6dCb4cZjTqssydKl2lw
+# four threads, build system must have found the library. ;)
+
 April 26, 2016 :: Working minimum to build Argon2 on x86_64 with a known good libpthread on-system.
 April 25, 2016 :: Attempt to AutoTool Argon
