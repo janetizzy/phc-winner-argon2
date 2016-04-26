@@ -1,10 +1,7 @@
+#
+# Original ignores (other than the following groups)
 argon2
-libargon2.a
-libargon2.so
-libargon2.dylib
 .DS_Store
-src/*.o
-src/blake2/*.o
 genkat
 .idea
 *.pyc
@@ -18,3 +15,67 @@ Argon2.sdf
 Argon2.VC.opendb
 *.zip
 *.tar.gz
+
+#
+# AutoTool's ignores
+
+Makefile.in
+# AutoClutter directories
+/autom4te.cache
+/build-aux
+# /m4 - keep aux macros under version control
+/autoscan.log
+/autoscan-*.log
+/aclocal.m4
+/compile
+/config.h.in
+/config.h
+/config.log
+/config.status
+/configure
+/configure.scan
+/depcomp
+/install-sh
+/missing
+/stamp-h1
+
+#
+# 'C' build process ignores
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+
+# Build files
+.deps
+.dirstamp
