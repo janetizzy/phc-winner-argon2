@@ -5,9 +5,6 @@ AC_PREREQ([2.69])
 # This project:
 AC_INIT([argon2], [1.3], [https://github.com/P-H-C/phc-winner-argon2/issues], [argon2-1.3])
 
-# Add-in:
-m4_include([m4/ax_pthread.m4])
-
 # Organizational matters:
 AC_CONFIG_SRCDIR([src/argon2.c])
 AC_CONFIG_MACRO_DIR([m4])
@@ -23,15 +20,23 @@ AC_PROG_INSTALL
 AC_PROG_CC
 AC_PROG_MAKE_SET
 
+# Check for the pthread library, a MUST HAVE for Argon2.
+AX_PTHREAD(
+    [AC_DEFINE(HAVE_PTHREAD, 1, [Define if you have POSIX threads libraries and header files.])
+            AC_SUBST(PTHREAD_LIBS)
+            AC_SUBST(PTHREAD_CFLAGS)
+            AC_SUBST(PTHREAD_CC)
+            AC_SUBST(HAVE_PTHREAD)
+    ],
+    [AC_MSG_FAILURE([Unable to find POSIX threads (libpthread) library.])]
+    )
+
+# Check for an indication we can use SIMD - needs non-Intel handling added
+AC_CHECK_HEADERS([emmintrin.h], [AC_SUBST(HAVE_SIMD, 1)], [AC_SUBST(HAVE_SIMD, 0)])
+AM_CONDITIONAL([SIMD], [test $HAVE_SIMD == 1])
+
 # Checks for libraries.
-AX_PTHREAD( [
-            AC_DEFINE(HAVE_PTHREAD,1,[Define if you have POSIX threads libraries and header files.])
-            CLIBS="$PTHREAD_LIBS $LIBS"
-            CFLAGS="$CFLAGS $PTHREAD_CFLAGS"
-            LDFLAGS="$LDFLAGS $PTHREAD_CFLAGS"
-            CC="$PTHREAD_CC"],
-            [AC_MSG_FAILURE([Unable to find POSIX threads (libpthread) library.])])
-            
+
 # Checks for header files.
 AC_CHECK_HEADERS([inttypes.h limits.h stddef.h stdint.h stdlib.h string.h])
 
