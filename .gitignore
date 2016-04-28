@@ -18,7 +18,7 @@ Argon2.VC.opendb
 
 #
 # AutoTool's ignores
-
+Makefile
 Makefile.in
 # AutoClutter directories
 /autom4te.cache

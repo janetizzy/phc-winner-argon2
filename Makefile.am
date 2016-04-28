@@ -32,8 +32,3 @@ bin_PROGRAMS = argon2 bench genkat
 argon2_SOURCES = src/run.c $(common_SRCS) $(simd_SRC)
 bench_SOURCES  = src/bench.c $(common_SRCS) $(simd_SRC)
 genkat_SOURCES = src/genkat.c $(common_SRCS) $(simd_SRC)
-
-# argon2_SOURCES = \
-# 	src/argon2.c src/core.c src/blake2/blake2b.c \
-# 	src/thread.c src/encoding.c src/run.c src/opt.c
-# argon2_LDFLAGS = '-lpthread'

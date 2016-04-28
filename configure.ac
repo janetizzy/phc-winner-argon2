@@ -3,7 +3,7 @@
 AC_PREREQ([2.69])
 
 # This project:
-AC_INIT([argon2], [1.3], [https://github.com/P-H-C/phc-winner-argon2/issues], [argon2-1.3])
+AC_INIT([argon2], [1.3], [https://github.com/P-H-C/phc-winner-argon2/issues], [argon2-1.3], [https://github.com/janetizzy/phc-winner-argon2])
 
 # Organizational matters:
 AC_CONFIG_SRCDIR([src/argon2.c])
