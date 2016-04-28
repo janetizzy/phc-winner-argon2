@@ -8,6 +8,7 @@ have_PTHREAD	= @HAVE_PTHREAD@
 
 # Exported from SIMD available check
 have_SIMD	= @HAVE_SIMD@
+simd_header	= @SIMD_HEADER@
 
 # Return to your normal programming
 #

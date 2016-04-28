@@ -3,7 +3,7 @@
 AC_PREREQ([2.69])
 
 # This project:
-AC_INIT([argon2], [1.3], [https://github.com/P-H-C/phc-winner-argon2/issues], [argon2-1.3], [https://github.com/janetizzy/phc-winner-argon2])
+AC_INIT([argon2], [1.3], [https://github.com/janetizzy/phc-winner-argon2/issues], [argon2-1.3], [https://github.com/janetizzy/phc-winner-argon2])
 
 # Organizational matters:
 AC_CONFIG_SRCDIR([src/argon2.c])
@@ -31,8 +31,16 @@ AX_PTHREAD(
     [AC_MSG_FAILURE([Unable to find POSIX threads (libpthread) library.])]
     )
 
-# Check for an indication we can use SIMD - needs non-Intel handling added
-AC_CHECK_HEADERS([emmintrin.h], [AC_SUBST(HAVE_SIMD, 1)], [AC_SUBST(HAVE_SIMD, 0)])
+# Allow user to enter a non-GCC name for the __M128 compiler intrinics header.
+AC_ARG_VAR(SIMD_HEADER,
+		  [Name of header that defines __m128 functions; default: emmintrin.h])
+
+if test "x$ac_cv_env_SIMD_HEADER_value" = "x"; then
+	SIMD_HEADER="emmintrin.h"
+fi
+
+# Generate the check for either the default or user specified __128 header.
+AC_CHECK_HEADERS($SIMD_HEADER, [AC_SUBST(HAVE_SIMD, 1)], [AC_SUBST(HAVE_SIMD, 0)])
 AM_CONDITIONAL([SIMD], [test $HAVE_SIMD == 1])
 
 # Checks for libraries.

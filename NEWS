@@ -1,4 +1,23 @@
-April 27, 2016 :: Generalize the SIMD header locator
+April 27, 2016 :: Add option for non-GCC, __m128 intrinsics header name
+# @WeedOne:~/SCM/argon2> ./configure
+# @WeedOne:~/SCM/argon2> grep 'SIMD_HEADER\|simd_SRC' Makefile
+# SIMD_HEADER = emmintrin.h
+# #simd_SRC = src/ref.c
+# simd_SRC = src/opt.c
+# argon2_SOURCES = src/run.c $(common_SRCS) $(simd_SRC)
+# bench_SOURCES = src/bench.c $(common_SRCS) $(simd_SRC)
+# genkat_SOURCES = src/genkat.c $(common_SRCS) $(simd_SRC)
+
+# @WeedOne:~/SCM/argon2> ./configure SIMD_HEADER=junk.h
+# @WeedOne:~/SCM/argon2> grep 'SIMD_HEADER\|simd_SRC' Makefile
+# SIMD_HEADER = junk.h
+# simd_SRC = src/ref.c
+# #simd_SRC = src/opt.c
+# argon2_SOURCES = src/run.c $(common_SRCS) $(simd_SRC)
+# bench_SOURCES = src/bench.c $(common_SRCS) $(simd_SRC)
+# genkat_SOURCES = src/genkat.c $(common_SRCS) $(simd_SRC)
+The sources are not ready for an alternate name of that compiler provided header (yet).
+
 April 26, 2016 :: Add-in configure to makefile condition linkage.
 April 26, 2016 :: Add-in a general libpthread locator
 # ~/SCM/argon2> ./argon2 1234567890 -t 7 -p 4 -e
