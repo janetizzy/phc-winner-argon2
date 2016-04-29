@@ -3,7 +3,8 @@
 AC_PREREQ([2.69])
 
 # This project:
-AC_INIT([argon2], [1.3], [https://github.com/janetizzy/phc-winner-argon2/issues], [argon2-1.3], [https://github.com/janetizzy/phc-winner-argon2])
+AC_INIT([argon2], [1.3], [https://github.com/janetizzy/phc-winner-argon2/issues],
+		[argon2-1.3], [https://github.com/janetizzy/phc-winner-argon2])
 
 # Organizational matters:
 AC_CONFIG_SRCDIR([src/argon2.c])
@@ -26,22 +27,48 @@ AX_PTHREAD(
             AC_SUBST(PTHREAD_LIBS)
             AC_SUBST(PTHREAD_CFLAGS)
             AC_SUBST(PTHREAD_CC)
-            AC_SUBST(HAVE_PTHREAD)
     ],
     [AC_MSG_FAILURE([Unable to find POSIX threads (libpthread) library.])]
     )
+AC_SUBST(HAVE_PTHREAD)
 
-# Allow user to enter a non-GCC name for the __M128 compiler intrinics header.
-AC_ARG_VAR(SIMD_HEADER,
-		  [Name of header that defines __m128 functions; default: emmintrin.h])
+## Development Options -
 
-if test "x$ac_cv_env_SIMD_HEADER_value" = "x"; then
-	SIMD_HEADER="emmintrin.h"
+# Allow user to enable source/asm listing.
+AC_ARG_ENABLE([listing], AS_HELP_STRING([--enable-listing], [Enable source/asm listing]))
+AM_CONDITIONAL([do_LISTING], [test "x$enable_listing" == "xyes"])
+
+# Allow user to enter a non-GCC name for Intel/AMD/GCC SSE2 intrinsics header.
+AC_ARG_VAR(SSE2_SIMD_HEADER,
+		  [Name of header that defines SSE2 intrinsics; default: emmintrin.h])
+
+if test "x$SSE2_SIMD_HEADER" == "x"; then
+	SSE2_SIMD_HEADER="emmintrin.h"
 fi
 
-# Generate the check for either the default or user specified __128 header.
-AC_CHECK_HEADERS($SIMD_HEADER, [AC_SUBST(HAVE_SIMD, 1)], [AC_SUBST(HAVE_SIMD, 0)])
-AM_CONDITIONAL([SIMD], [test $HAVE_SIMD == 1])
+# Allow user to enter a non-GCC name for Intel/AMD/GCC SSSE3 intrinsics header.
+AC_ARG_VAR(SSSE3_SIMD_HEADER,
+		  [Name of header that defines SSSE3 intrinsics; default: tmmintrin.h])
+
+if test "x$SSSE3_SIMD_HEADER" == "x"; then
+	SSSE3_SIMD_HEADER="tmmintrin.h"
+fi
+
+# Check either the default or user specified SSE2 header.
+AC_CHECK_HEADERS($SSE2_SIMD_HEADER,
+				[AC_SUBST(HAVE_SSE2_SIMD, 1)],
+				[AC_SUBST(HAVE_SSE2_SIMD, 0)]
+				)
+# Export the condition test to *.am
+AM_CONDITIONAL([use_SSE2_SIMD], [test "$HAVE_SSE2_SIMD" == "1"])
+
+# Check either the default or user specified SSSE3 header.
+AC_CHECK_HEADERS($SSSE3_SIMD_HEADER,
+				[AC_SUBST(HAVE_SSSE3_SIMD, 1)],
+				[AC_SUBST(HAVE_SSSE3_SIMD, 0)]
+				)
+# Export the condition test to *.am
+AM_CONDITIONAL([use_SSSE3_SIMD], [test "$HAVE_SSSE3_SIMD" == "1"])
 
 # Checks for libraries.
 
